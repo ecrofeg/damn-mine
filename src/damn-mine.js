@@ -1,1 +1,4 @@
-let initString = 'Hello world!';
+require('bootstrap');
+require('bootstrap-material-design');
+
+$.material.init();

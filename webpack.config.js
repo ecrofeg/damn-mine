@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const config = {
 	watch: true,
@@ -24,7 +25,14 @@ const config = {
 				}
 			}
 		]
-	}
+	},
+	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery'
+		})
+	]
 };
 
 module.exports = config;
