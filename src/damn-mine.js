@@ -1,0 +1,1 @@
+let initString = 'Hello world!';
