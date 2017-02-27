@@ -1,4 +1,3 @@
-require('bootstrap');
-require('bootstrap-material-design');
+import Damn from './js/core/damn';
 
-$.material.init();
+const app = new Damn(document.getElementById('root'));
