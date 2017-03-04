@@ -3,20 +3,20 @@ const webpack = require('webpack');
 
 const config = {
 	watch: true,
-	entry: './src/damn-mine.js',
+	entry: './src/frontend/damn-mine.js',
 	output: {
 		path: path.resolve(__dirname, 'public/dist'),
 		filename: 'damn-mine.js'
 	},
 	resolve: {
 		modules: [
-			path.join(__dirname, 'src'),
+			path.join(__dirname, 'src/frontend'),
 			'node_modules'
 		],
 		extensions: ['.js'],
 		alias: {
-			'@core': path.resolve(__dirname, 'src/js/core'),
-			'@component': path.resolve(__dirname, 'src/component')
+			'@core': path.resolve(__dirname, 'src/frontend/js/core'),
+			'@component': path.resolve(__dirname, 'src/frontend/component')
 		}
 	},
 	module: {
