@@ -1,4 +1,4 @@
-import AbstractComponent from '../../js/core/component';
+import AbstractComponent from '@core/component';
 import ko from 'knockout';
 
 export default class RootComponent extends AbstractComponent {

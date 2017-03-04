@@ -1,18 +1,20 @@
 import ko from 'knockout';
+
 require('bootstrap');
 require('bootstrap-material-design');
 
 export default class Damn {
+	constructor() {
+		this.initKoLoaders();
+	}
+
 	/**
+	 * Run the application.
+	 * 
 	 * @param {Node} koRootNode
 	 */
-	constructor(koRootNode = null) {
-		this.initKoLoaders();
+	run(koRootNode = null) {
 		ko.applyBindings({ app: this }, koRootNode);
-
-		setTimeout(() => {
-			$.material.init();
-		}, 10);
 	}
 
 	/**
@@ -36,14 +38,16 @@ export default class Damn {
 
 		ko.components.loaders.unshift({
 			getConfig: function (name, callback) {
-				const pathParts = name.split('-').slice(1);
-				const componentName = pathParts[pathParts.length - 1];
-				const path = pathParts.join('/');
-				
-				callback({
-					viewModel: require(`../../component/${path}/${componentName}.js`).default,
-					template: require(`../../component/${path}/${componentName}.html`)
-				});
+				const 
+					pathParts = name.split('-').slice(1),
+					componentName = pathParts[pathParts.length - 1],
+					path = pathParts.join('/');
+
+				const 
+					viewModel = require(`@component/${path}/${componentName}.js`).default,
+					template = require(`@component/${path}/${componentName}.html`);
+
+				callback({ viewModel, template });
 			},
 			loadViewModel: function (name, viewModelConstructor, callback) {
 				callback(function (params) {

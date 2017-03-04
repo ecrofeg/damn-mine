@@ -13,7 +13,11 @@ const config = {
 			path.join(__dirname, 'src'),
 			'node_modules'
 		],
-		extensions: ['.js']
+		extensions: ['.js'],
+		alias: {
+			'@core': path.resolve(__dirname, 'src/js/core'),
+			'@component': path.resolve(__dirname, 'src/component')
+		}
 	},
 	module: {
 		rules: [
