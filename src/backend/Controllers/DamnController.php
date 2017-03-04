@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace backend\Controllers;
 
 use backend\Core\AbstractController;
@@ -14,7 +16,7 @@ class DamnController extends AbstractController {
 	 *
 	 * @return string
 	 */
-	public function actionIndex(Request $request, Application $app) : string {
+	public function actionIndex(Request $request, Application $app): string {
 		return $this->render($app, 'index.html');
 	}
 }
