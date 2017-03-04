@@ -4,4 +4,15 @@ declare(strict_types = 1);
 
 namespace backend\Core;
 
-class AbstractModel { }
+abstract class AbstractModel {
+	
+	/**
+	 * @param array $data
+	 */
+	abstract public function parse(array $data);
+	
+	/**
+	 * @return array
+	 */
+	abstract public function toOutput();
+}

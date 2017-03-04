@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace backend\API\Models;
 
 use backend\Core\AbstractModel;
@@ -43,6 +41,64 @@ class User extends AbstractModel {
 	 * @var \backend\Core\Date
 	 */
 	protected $_lastLoginDate;
+	
+	/**
+	 * @var array
+	 */
+	public static $map = [
+		'id'            => '_id',
+		'login'         => '_login',
+		'firstname'     => '_firstName',
+		'lastname'      => '_lastName',
+		'mail'          => '_email',
+		'created_on'    => '_registerDate',
+		'last_login_on' => '_lastLoginDate',
+	];
+	
+	/**
+	 * User constructor.
+	 *
+	 * @param array $data
+	 */
+	public function __construct(array $data) {
+		$this->parse($data);
+	}
+	
+	/**
+	 * @param array $data
+	 */
+	public function parse(array $data) {
+		foreach ($data as $fieldName => $field) {
+			if (isset(static::$map[$fieldName])) {
+				$classFieldName = static::$map[$fieldName];
+				
+				switch ($classFieldName) {
+					case '_registerDate':
+					case '_lastLoginDate':
+						$value = Date::createFromFormat('Y-m-d\TH:i:sO', $field);
+						break;
+						
+					default:
+						$value = $field;
+						break;
+				}
+				
+				$this->{$classFieldName} = $value;
+			}
+		}
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function toOutput() {
+		return [
+			'id' => $this->getId(),
+			'firstName' => $this->getFirstName(),
+			'lastName' => $this->getLastName(),
+			'email' => $this->getEmail(),
+		];
+	}
 	
 	/**
 	 * @return int

@@ -25,22 +25,17 @@ class App extends Application {
 		
 		$this['debug'] = true;
 		
-		parent::run($request);
-		
-//		$client = new \GuzzleHttp\Client([
-//			'base_uri' => 'http://helpdesk.nemo.travel/'
-//		]);
-//		
-//		$res = $client->request('GET', 'issues.json', [
-//			'query' => [
-//				'assigned_to_id' => 420
-//			],
-//			'headers' => [
-//				'X-Redmine-API-Key' => '4feb780f9bddc9e5f637ca5b8a7e497357dfd2d7'
-//			]
-//		]);
-		
 		$this->loadApiKey();
+		
+		$this->error(function (\Exception $ex) {
+			return $this->json([
+				'error' => [
+					'message' => $ex->getMessage(),
+				]
+			]);
+		});
+		
+		parent::run($request);
 	}
 	
 	/**

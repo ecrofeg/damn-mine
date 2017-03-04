@@ -1,10 +1,49 @@
 import ko from 'knockout';
+import request from 'request-promise';
 
 require('bootstrap');
 require('bootstrap-material-design');
 
 export default class Damn {
 	constructor() {
+		this.apiVersion = 'v0.1';
+		this.apiOrigin = window.location.origin;
+		this.apiUrl = `${this.apiOrigin}/api/${this.apiVersion}`;
+		
+		this.request = {
+			get: (url, params = {}) => {
+				return request({
+					uri: this.apiUrl + url,
+					qs: params,
+					json: true
+				});
+			},
+			post: (url, params = {}) => {
+				return request({
+					method: 'POST',
+					uri: this.apiUrl + url,
+					body: params,
+					json: true
+				});
+			},
+			put: (url, params = {}) => {
+				return request({
+					method: 'PUT',
+					uri: this.apiUrl + url,
+					body: params,
+					json: true
+				});
+			},
+			delete: (url, params = {}) => {
+				return request({
+					method: 'DELETE',
+					uri: this.apiUrl + url,
+					body: params,
+					json: true
+				});
+			}
+		};
+		
 		this.initKoLoaders();
 	}
 
@@ -49,8 +88,8 @@ export default class Damn {
 
 				callback({ viewModel, template });
 			},
-			loadViewModel: function (name, viewModelConstructor, callback) {
-				callback(function (params) {
+			loadViewModel: (name, viewModelConstructor, callback) => {
+				callback((params) => {
 					params.app = this;
 
 					return new viewModelConstructor(params);

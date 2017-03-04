@@ -8,6 +8,11 @@ const config = {
 		path: path.resolve(__dirname, 'public/dist'),
 		filename: 'damn-mine.js'
 	},
+	node: {
+		fs: 'empty',
+		net: 'empty',
+		tls: 'empty'
+	},
 	resolve: {
 		modules: [
 			path.join(__dirname, 'src/frontend'),

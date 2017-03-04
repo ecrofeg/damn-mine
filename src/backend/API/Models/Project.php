@@ -17,4 +17,32 @@ class Project extends AbstractModel {
 	 * @var string 
 	 */
 	protected $_name;
+	
+	/**
+	 * @return int
+	 */
+	public function getId(): int {
+		return $this->_id;
+	}
+	
+	/**
+	 * @param int $id
+	 */
+	public function setId(int $id) {
+		$this->_id = $id;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getName(): string {
+		return $this->_name;
+	}
+	
+	/**
+	 * @param string $name
+	 */
+	public function setName(string $name) {
+		$this->_name = $name;
+	}
 }
